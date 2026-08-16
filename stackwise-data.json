@@ -14,7 +14,7 @@
         { "input": "s = \"(]\"", "output": "false" }
       ],
       "answer": "Use a stack for opening brackets and a HashMap that maps each closing bracket to its matching opening bracket.",
-      "code": "HashMap<Character, Character> reverseMap = new HashMap<>();\nreverseMap.put(')', '(');\nreverseMap.put(']', '[');\nreverseMap.put('}', '{');\nStack<Character> stackString = new Stack<>();\n\nfor (char current : s.toCharArray()) {\n    if (reverseMap.containsKey(current)) {\n        if (stackString.isEmpty() ||\n            !stackString.peek().equals(reverseMap.get(current))) {\n            return false;\n        }\n        stackString.pop();\n    } else {\n        stackString.push(current);\n    }\n}\nreturn stackString.isEmpty();",
+      "code": "class Solution {\n    public boolean isValid(String s) {\n        HashMap<Character, Character> reverseMap = new HashMap<>();\n        reverseMap.put(')', '(');\n        reverseMap.put(']', '[');\n        reverseMap.put('}', '{');\n\n        Stack<Character> stackString = new Stack<>();\n\n        for (int i = 0; i < s.length(); i++) {\n            char current = s.charAt(i);\n\n            if (reverseMap.containsKey(current)) {\n                if (stackString.isEmpty() ||\n                    !stackString.peek().equals(reverseMap.get(current))) {\n                    return false;\n                }\n                stackString.pop();\n            } else {\n                stackString.push(current);\n            }\n        }\n\n        return stackString.isEmpty();\n    }\n}",
       "complexity": "Time: O(n). Space: O(n) worst case for the stack; the HashMap is O(1).",
       "dueAt": 0,
       "reviews": 0,
