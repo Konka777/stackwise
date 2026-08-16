@@ -12,4 +12,20 @@ render = function () {
   document.querySelector(".hint")?.insertAdjacentHTML("beforebegin", `<div style="margin-top:20px;padding:14px;border-radius:10px;background:#f7f8fc;color:#3e4960;font-size:13px;line-height:1.7">${examples}</div>`);
 };
 setTimeout(() => { if (data) render(); }, 0);
+</script><script>
+const renderWithExamples = render;
+function previousCard() {
+  const cards = data.cards.slice().sort((a, b) => a.dueAt - b.dueAt);
+  const index = cards.findIndex((item) => item.id === card.id);
+  card = cards[(index - 1 + cards.length) % cards.length];
+}
+render = function () {
+  renderWithExamples();
+  const controls = `<div style="clear:both;padding-top:20px;display:flex;gap:10px;justify-content:flex-end"><button id="back" style="border:1px solid #d9deea;border-radius:9px;padding:10px 14px;background:white;color:#273a66;font-weight:bold">← Back to question</button><button id="previous" style="border:1px solid #d9deea;border-radius:9px;padding:10px 14px;background:white;color:#273a66;font-weight:bold">← Previous card</button></div>`;
+  if (shown) document.querySelector(".answer")?.insertAdjacentHTML("beforeend", controls);
+  else document.querySelector("#content")?.insertAdjacentHTML("beforeend", controls.replace('<button id="back" style="border:1px solid #d9deea;border-radius:9px;padding:10px 14px;background:white;color:#273a66;font-weight:bold">← Back to question</button>', ""));
+  document.querySelector("#back")?.addEventListener("click", () => { shown = false; render(); });
+  document.querySelector("#previous")?.addEventListener("click", () => { shown = false; previousCard(); render(); });
+};
+setTimeout(() => { if (data) render(); }, 0);
 </script></body></html>
