@@ -33,7 +33,7 @@
         { "input": "nums = [3, 3], target = 6", "output": "[0, 1]" }
       ],
       "answer": "As you scan the array, use a HashMap to remember each number and its index. For the current number, look up its complement: target minus the current number.",
-      "code": "HashMap<Integer, Integer> seen = new HashMap<>();\n\nfor (int i = 0; i < nums.length; i++) {\n    int complement = target - nums[i];\n\n    if (seen.containsKey(complement)) {\n        return new int[] { seen.get(complement), i };\n    }\n\n    seen.put(nums[i], i);\n}\n\nreturn new int[] {};",
+      "code": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        Map<Integer, Integer> map = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int addition = target - nums[i];\n            if (map.containsKey(addition)) {\n                return new int[]{i, map.get(addition)};\n            } else {\n                map.put(nums[i], i);\n            }\n        }\n        return new int[]{};\n    }\n}",
       "complexity": "Time: O(n). Space: O(n) for the HashMap.",
       "dueAt": 0,
       "reviews": 0,
