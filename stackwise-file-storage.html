@@ -32,9 +32,9 @@ setTimeout(() => { if (data) render(); }, 0);
 const renderWithNavigation = render;
 render = function () {
   renderWithNavigation();
-  document.querySelectorAll("#skip").forEach((button) => { button.textContent = "Skip"; button.style.marginLeft = "12px"; });
+  document.querySelectorAll("#skip").forEach((button) => { button.textContent = "Skip"; button.style.marginLeft = "0"; button.style.marginRight = "20px"; });
   const show = document.querySelector("#show");
-  if (show) show.style.marginRight = "12px";
+  if (show) show.style.marginRight = "0";
 };
 setTimeout(() => { if (data) render(); }, 0);
 </script></body></html>
